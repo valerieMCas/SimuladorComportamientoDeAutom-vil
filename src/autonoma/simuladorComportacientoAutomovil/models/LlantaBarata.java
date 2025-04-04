@@ -8,6 +8,13 @@ package autonoma.simuladorComportacientoAutomovil.models;
  *
  * @author usuario
  */
-public class LlantaBarata {
+public class LlantaBarata implements Llanta{
+
+    @Override
+    public double obtenerLimiteVelocidad() {
+        double limiteVelocidad = 50;
+        System.out.println("El limite de velocidad de las llantas baratas es de "+ limiteVelocidad+"km/h");
+        return limiteVelocidad;
+    }
     
 }

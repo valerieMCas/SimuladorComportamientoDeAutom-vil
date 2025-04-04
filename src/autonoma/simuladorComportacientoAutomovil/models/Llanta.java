@@ -8,6 +8,6 @@ package autonoma.simuladorComportacientoAutomovil.models;
  *
  * @author usuario
  */
-public class Llanta {
-    
+public interface Llanta {
+    public abstract double obtenerLimiteVelocidad();
 }
