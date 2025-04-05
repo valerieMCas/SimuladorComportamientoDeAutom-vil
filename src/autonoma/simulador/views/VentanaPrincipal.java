@@ -40,6 +40,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/gifs/boton.gif"))); // NOI18N
+        btnIniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnIniciarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,6 +77,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarMouseClicked
+        VentanaInicial ventana=new VentanaInicial(this, true, this.vehiculo);
+        ventana.setVisible(true);
+        
+    }//GEN-LAST:event_btnIniciarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

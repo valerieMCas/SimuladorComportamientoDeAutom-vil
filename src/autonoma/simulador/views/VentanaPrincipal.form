@@ -65,6 +65,9 @@
               <Image iconType="3" name="/autonoma/simulador/gifs/boton.gif"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnIniciarMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
