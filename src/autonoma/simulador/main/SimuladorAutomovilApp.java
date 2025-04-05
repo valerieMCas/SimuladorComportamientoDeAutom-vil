@@ -6,7 +6,7 @@ package autonoma.simulador.main;
 
 import autonoma.simulador.models.Vehiculo;
 import autonoma.simulador.views.VentanaPrincipal;
-
+import autonoma.simulador.sounds.SonidoInicio;
 
 
 /**
@@ -24,6 +24,10 @@ public class SimuladorAutomovilApp {
         
         VentanaPrincipal ventana= new VentanaPrincipal(vehiculo);
         ventana.setVisible(true);
+        
+        SonidoInicio repro = new SonidoInicio();
+        SonidoInicio.reproducir();
+
     }
     
 }

@@ -1,3 +1,4 @@
+
 package autonoma.simulador.models;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;

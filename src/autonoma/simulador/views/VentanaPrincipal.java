@@ -2,6 +2,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
+import java.applet.AudioClip;
 
 /**
  *
@@ -81,6 +82,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarMouseClicked
         VentanaInicial ventana=new VentanaInicial(this, true, this.vehiculo);
         ventana.setVisible(true);
+        AudioClip Sound;
+        Sound = java.applet.Applet.newAudioClip(getClass().getResource("autonoma/simulador/sounds/sonidoInicio.wav"));
+        Sound.play();
         
     }//GEN-LAST:event_btnIniciarMouseClicked
 
