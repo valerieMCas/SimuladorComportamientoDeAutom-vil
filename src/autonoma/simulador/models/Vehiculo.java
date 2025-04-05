@@ -1,5 +1,13 @@
 package autonoma.simulador.models;
 
+import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
+import autonoma.simulador.exception.ApagadoNoPuedeFrenarException;
+import autonoma.simulador.exception.DetenidoException;
+import autonoma.simulador.exception.ElVeiculoPatinaException;
+import autonoma.simulador.exception.SeAccidentaraException;
+import autonoma.simulador.exception.YaEstaApagadoException;
+import autonoma.simulador.exception.YaEstaEncendidoException;
+
 /**
  *
  * @author martin Taborda A
@@ -39,13 +47,19 @@ public class Vehiculo {
      * Si el vehiculo ya esta encendido, se muestra un mensaje indicando esto.
      */
     public boolean encender() {
+        try{
+            if(encendido){
+                throw new YaEstaEncendidoException();
+            }
+        }catch(YaEstaEncendidoException e){
+            System.out.println(e.getMessage());
+        }
         if (!encendido) {
             encendido = true;
             apagado = false;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -54,14 +68,26 @@ public class Vehiculo {
      * Si el vehiculo ya esta apagado, se muestra un mensaje indicando esto.
      */
     public boolean apagar() {
+        try{
+            if(apagado){
+                throw new YaEstaApagadoException();
+            }
+            if(this.velocidadActual>60.0){
+                throw new SeAccidentaraException();
+            }
+        }catch(YaEstaApagadoException e){
+            System.out.println(e.getMessage());
+        }catch(SeAccidentaraException e){
+            System.out.println(e.getMessage());
+            apagado = true;
+        }
         if (encendido) {
             encendido = false;
             apagado = true;
             velocidadActual = 0.0;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -72,6 +98,13 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
     public double acelerar(double incremento) {
+        try{
+            if(apagado){
+                throw new ApagadoNoPuedeAcelerarException();
+            }
+        }catch(ApagadoNoPuedeAcelerarException e){
+            System.out.println(e.getMessage());
+        }
         if (encendido) {
             velocidadActual += incremento;
 
@@ -79,10 +112,15 @@ public class Vehiculo {
             double limiteLlanta = llantas.getLimiteVelocidad();
 
             double limitePermitido = Math.min(limiteMotor, limiteLlanta);
-
-            if (velocidadActual > limitePermitido) {
-                velocidadActual = limitePermitido;
+            try{
+                if (velocidadActual > limitePermitido) {
+                    throw new SeAccidentaraException();
+                }
+            }catch(SeAccidentaraException e){
+                System.out.println(e.getMessage());
+                this.apagar();
             }
+            
         }
         return velocidadActual;
     }
@@ -95,6 +133,25 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de frenar.
      */
     public double frenar(double decremento) {
+        try{
+            if(apagado){
+                throw new ApagadoNoPuedeFrenarException();
+            }
+            if(velocidadActual==0){
+                throw new DetenidoException();
+            }
+            if(velocidadActual>llantas.getLimiteVelocidad()){
+                throw new ElVeiculoPatinaException();
+            }
+        }catch(ApagadoNoPuedeFrenarException e){
+            System.out.println(e.getMessage());
+        }catch(DetenidoException e){
+            System.out.println(e.getMessage());
+        }catch(ElVeiculoPatinaException e){
+            System.out.println(e.getMessage());
+            this.patinando = true;
+            this.recuperarElControl();
+        }
         if (velocidadActual > 0) {
             velocidadActual -= decremento;
             if (velocidadActual < 0) {
@@ -112,6 +169,15 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de frenar bruscamente.
      */
     public double frenarBruscamente(double decremento) {
+        try{
+            if(velocidadActual<decremento){
+                throw new ElVeiculoPatinaException();
+            }
+        }catch(ElVeiculoPatinaException e){
+            System.out.println(e.getMessage());
+            patinando=true;
+            this.recuperarElControl();
+        }
         if (velocidadActual > 0) {
             velocidadActual -= decremento * 2;
             if (velocidadActual < 0) {
@@ -120,6 +186,11 @@ public class Vehiculo {
             patinando = true;
         }
         return velocidadActual;
+    }
+    public void recuperarElControl(){
+        if (patinando){
+            velocidadActual=0;
+        }
     }
 }
 
