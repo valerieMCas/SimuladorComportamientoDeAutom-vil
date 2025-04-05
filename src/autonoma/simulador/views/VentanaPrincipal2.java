@@ -16,14 +16,14 @@ public class VentanaPrincipal2 extends javax.swing.JDialog {
     private VentanaPrincipal ventana;
     private Vehiculo vehiculo;
     /** Creates new form VentanaPrincipal2 */
-    public VentanaPrincipal2(java.awt.Frame parent, boolean modal,Vehiculo vehiculo,VentanaPrincipal ventana) {
+    public VentanaPrincipal2(java.awt.Frame parent, boolean modal,Vehiculo vehiculo) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         try{
            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png")).getImage());
         }catch(Exception e){
-            
+            System.out.println("imagen no encontrada");
         }
         this.vehiculo=vehiculo;
     }
@@ -38,12 +38,27 @@ public class VentanaPrincipal2 extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/views/fotoManubrio.jpg"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/views/fotoManubrio.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 530, 300));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/fotoManubrio.jpg"))); // NOI18N
+        jPanel2.add(jLabel2);
+        jPanel2.add(jPanel3);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png"))); // NOI18N
+        jPanel2.add(jLabel3);
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 610, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -51,6 +66,12 @@ public class VentanaPrincipal2 extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 
 }

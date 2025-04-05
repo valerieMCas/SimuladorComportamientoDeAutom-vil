@@ -19,13 +19,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     
     public VentanaPrincipal(Vehiculo vehiculo) {
-        
         initComponents();
         this.setLocationRelativeTo(null);
+        
         try{
            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png ")).getImage());
         }catch(Exception e){
-            
+            System.out.println("imagen no encontrada");
         }
         this.vehiculo=vehiculo;
     }
@@ -69,7 +69,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
-        VentanaPrincipal2 ventana = new VentanaPrincipal2(this, true, this.vehiculo, this);
+        VentanaPrincipal2 ventana = new VentanaPrincipal2(this, true, this.vehiculo);
         ventana.setVisible(true);
     }//GEN-LAST:event_btnEncenderMouseClicked
 
