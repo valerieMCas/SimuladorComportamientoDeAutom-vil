@@ -21,7 +21,7 @@ public class VentanaPrincipal2 extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(null);
         try{
-           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/-boton-arranque.jpg")).getImage());
+           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png")).getImage());
         }catch(Exception e){
             
         }

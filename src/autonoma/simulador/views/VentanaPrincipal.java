@@ -15,6 +15,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private Vehiculo vehiculo;
     /**
      * Creates new form VentanaPrincipal
+     * @param vehiculo
      */
     
     public VentanaPrincipal(Vehiculo vehiculo) {
@@ -22,7 +23,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         try{
-           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/carrito.jpg")).getImage());
+           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png ")).getImage());
         }catch(Exception e){
             
         }
