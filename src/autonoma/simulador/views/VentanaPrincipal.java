@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package autonoma.simulador.views;
 
 import autonoma.simulador.models.Vehiculo;
@@ -9,25 +5,23 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author marti
+ * @author Kamii
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     private Vehiculo vehiculo;
     /**
      * Creates new form VentanaPrincipal
-     * @param vehiculo
      */
-    
     public VentanaPrincipal(Vehiculo vehiculo) {
         initComponents();
         this.setLocationRelativeTo(null);
         
         try{
-           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/coche.png ")).getImage());
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/CarroFondo.png")).getImage());
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo=vehiculo;
+        this.vehiculo = vehiculo;
     }
 
     /**
@@ -39,43 +33,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnEncender = new javax.swing.JButton();
+        btnIniciar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/boton-arranque.jpg"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 330));
+        btnIniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/gifs/boton.gif"))); // NOI18N
 
-        btnEncender.setText("jButton1");
-        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEncenderMouseClicked(evt);
-            }
-        });
-        getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 63, 180, 190));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnIniciar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jLabel1))
+            .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
-        VentanaPrincipal2 ventana = new VentanaPrincipal2(this, true, this.vehiculo);
-        ventana.setVisible(true);
-    }//GEN-LAST:event_btnEncenderMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEncender;
+    private javax.swing.JLabel btnIniciar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
