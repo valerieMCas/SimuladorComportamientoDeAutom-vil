@@ -4,6 +4,9 @@
  */
 package autonoma.simulador.main;
 
+import autonoma.simulador.models.Vehiculo;
+import autonoma.simulador.views.VentanaPrincipal;
+
 /**
  *
  * @author usuario
@@ -14,7 +17,11 @@ public class SimuladorAutomovilApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Vehiculo vehiculo=new Vehiculo();
+        
+        VentanaPrincipal ventana= new VentanaPrincipal(vehiculo);
+        ventana.setVisible(true);
     }
     
 }

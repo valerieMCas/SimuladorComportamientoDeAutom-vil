@@ -4,17 +4,29 @@
  */
 package autonoma.simulador.views;
 
+import autonoma.simulador.models.Vehiculo;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author marti
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    private Vehiculo vehiculo;
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    
+    public VentanaPrincipal(Vehiculo vehiculo) {
+        
         initComponents();
+        this.setLocationRelativeTo(null);
+        try{
+           this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/carrito.jpg")).getImage());
+        }catch(Exception e){
+            
+        }
+        this.vehiculo=vehiculo;
     }
 
     /**
@@ -27,7 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnEncender = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -40,8 +52,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 330));
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 63, 180, 190));
+        btnEncender.setText("jButton1");
+        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnEncender, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 63, 180, 190));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -50,9 +67,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
+        VentanaPrincipal2 ventana = new VentanaPrincipal2(this, true, this.vehiculo, this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btnEncenderMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEncender;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
