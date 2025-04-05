@@ -4,8 +4,6 @@
  */
 package autonoma.simulador.models;
 
-import autonoma.simulador.models.Motor;
-
 /**
  *
  * @author usuario

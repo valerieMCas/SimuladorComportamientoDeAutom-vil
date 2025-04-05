@@ -1,22 +1,17 @@
 package autonoma.simulador.models;
 
-
 /**
  *
- * @author usuario
+ * @author Kamii
  */
-public class Motor1000CC implements Motor{
-
+public class Motor00cc implements Motor{
     @Override
     public String getNombre() {
-        return "1000 cc";
+        return "00 cc";
     }
 
     @Override
     public double obtenerVelocidadMaxima() {
-        return 100;
+        return 0;
     }
-
-
-    
 }

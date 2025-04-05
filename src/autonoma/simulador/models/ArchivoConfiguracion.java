@@ -57,7 +57,7 @@ public class ArchivoConfiguracion {
         String tipoLlantas = lineas.get(0).trim();
         String tipoMotor = lineas.get(1).trim();
 
-        Llantas llantas = crearLlantas(tipoLlantas);
+        Llanta llantas = crearLlantas(tipoLlantas);
         Motor motor = crearMotor(tipoMotor);
 
         return new Vehiculo(llantas, motor);
@@ -71,15 +71,10 @@ public class ArchivoConfiguracion {
      */
     private Llanta crearLlantas(String tipo) {
         switch (tipo.toLowerCase()) {
-            case "buenas": return new Llanta("Buenas", 110) {
-            @Override
-            public double obtenerLimiteVelocidad() {
-                
-            }
-        } ;
-            case "bonitas": return new Llanta("Bonitas", 70);
-            case "baratas": return new Llanta("Baratas", 50);
-            default: return new Llanta("Desconocidas", 0);
+            case "buenas": return new LlantaBuena() ;
+            case "bonitas": return new LlantaBonita();
+            case "baratas": return new LlantaBarata();
+            default: return new LlantaDesconocida();
         }
     }
 
@@ -91,10 +86,10 @@ public class ArchivoConfiguracion {
      */
     private Motor crearMotor(String tipo) {
         switch (tipo) {
-            case "1000": return new Motor(1000, 100);
-            case "2000": return new Motor(2000, 160);
-            case "3000": return new Motor(3000, 220);
-            default: return new Motor(0, 0);
+            case "1000": return new Motor1000CC();
+            case "2000": return new Motor2000CC();
+            case "3000": return new Motor3000CC();
+            default: return new Motor00cc();
         }
     }
     

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.simulador.models;
 
 /**
@@ -14,6 +10,8 @@ public class Vehiculo {
     /**
      * Atributos
      */
+    private Motor motor;
+    private Llanta llantas;
     private double velocidadActual;
     private boolean encendido;
     private boolean apagado;
@@ -29,6 +27,12 @@ public class Vehiculo {
         this.apagado = true;
         this.patinando = false;
     }
+    
+    public Vehiculo(Llanta llantas, Motor motor){
+        this.motor = motor;
+        this.llantas = llantas;
+    }
+    
 
     /**
      * Metodo que permite encender el vehiculo.
