@@ -38,13 +38,13 @@ public class Vehiculo {
      * Metodo que permite encender el vehiculo.
      * Si el vehiculo ya esta encendido, se muestra un mensaje indicando esto.
      */
-    public void encender() {
+    public boolean encender() {
         if (!encendido) {
             encendido = true;
             apagado = false;
-            System.out.println("El vehiculo ha sido encendido.");
+            return true;
         } else {
-            System.out.println("El vehiculo ya esta encendido.");
+            return false;
         }
     }
 
@@ -53,14 +53,14 @@ public class Vehiculo {
      * Al apagarlo, la velocidad se establece en 0.
      * Si el vehiculo ya esta apagado, se muestra un mensaje indicando esto.
      */
-    public void apagar() {
+    public boolean apagar() {
         if (encendido) {
             encendido = false;
             apagado = true;
             velocidadActual = 0.0;
-            System.out.println("El vehiculo ha sido apagado.");
+            return true;
         } else {
-            System.out.println("El vehiculo ya esta apagado.");
+            return false;
         }
     }
 
@@ -68,58 +68,58 @@ public class Vehiculo {
      * Metodo que permite acelerar el vehiculo.
      * Solo se puede acelerar si el vehiculo esta encendido.
      * 
-     * @param velocidadActual La cantidad de velocidad a aumentar.
+     * @param incremento La cantidad de velocidad a aumentar.
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
-    public double acelerar(double velocidadActual) {
+    public double acelerar(double incremento) {
         if (encendido) {
-            this.velocidadActual += velocidadActual;
-            System.out.println("El vehiculo ha acelerado. Velocidad actual: " + this.velocidadActual + " km/h");
-        } else {
-            System.out.println("No se puede acelerar. El vehiculo esta apagado.");
+            velocidadActual += incremento;
+
+            double limiteMotor = motor.obtenerVelocidadMaxima();
+            double limiteLlanta = llantas.getLimiteVelocidad();
+
+            double limitePermitido = Math.min(limiteMotor, limiteLlanta);
+
+            if (velocidadActual > limitePermitido) {
+                velocidadActual = limitePermitido;
+            }
         }
-        return this.velocidadActual;
+        return velocidadActual;
     }
 
     /**
      * Metodo que permite frenar el vehiculo.
      * La velocidad disminuye en la cantidad especificada, sin permitir valores negativos.
      * 
-     * @param velocidadActual La cantidad de velocidad a reducir.
+     * @param decremento La cantidad de velocidad a reducir.
      * @return La nueva velocidad actual del vehiculo despues de frenar.
      */
-    public double frenar(double velocidadActual) {
-        if (this.velocidadActual > 0) {
-            this.velocidadActual -= velocidadActual;
-            if (this.velocidadActual < 0) {
-                this.velocidadActual = 0;
+    public double frenar(double decremento) {
+        if (velocidadActual > 0) {
+            velocidadActual -= decremento;
+            if (velocidadActual < 0) {
+                velocidadActual = 0;
             }
-            System.out.println("El vehiculo ha frenado. Velocidad actual: " + this.velocidadActual + " km/h");
-        } else {
-            System.out.println("El vehiculo ya esta detenido.");
         }
-        return this.velocidadActual;
+        return velocidadActual;
     }
 
     /**
      * Metodo que permite frenar bruscamente el vehiculo.
      * La velocidad disminuye al doble de la cantidad especificada y el vehiculo entra en estado de patinaje.
      * 
-     * @param velocidadActual La cantidad de velocidad a reducir, multiplicada por 2.
+     * @param decremento La cantidad de velocidad a reducir, multiplicada por 2.
      * @return La nueva velocidad actual del vehiculo despues de frenar bruscamente.
      */
-    public double frenarBruscamente(double velocidadActual) {
-        if (this.velocidadActual > 0) {
-            this.velocidadActual -= velocidadActual * 2;
-            if (this.velocidadActual < 0) {
-                this.velocidadActual = 0;
+    public double frenarBruscamente(double decremento) {
+        if (velocidadActual > 0) {
+            velocidadActual -= decremento * 2;
+            if (velocidadActual < 0) {
+                velocidadActual = 0;
             }
             patinando = true;
-            System.out.println("El vehiculo ha frenado bruscamente y esta patinando. Velocidad actual: " + this.velocidadActual + " km/h");
-        } else {
-            System.out.println("El vehiculo ya esta detenido.");
         }
-        return this.velocidadActual;
+        return velocidadActual;
     }
 }
 
