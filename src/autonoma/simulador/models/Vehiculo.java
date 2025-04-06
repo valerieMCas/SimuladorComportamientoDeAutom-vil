@@ -126,6 +126,7 @@ public class Vehiculo {
             double limitePermitido = Math.min(limiteMotor, limiteLlanta);
         
             if (velocidadActual > limitePermitido) {
+                apagar();
                 throw new SeAccidentaraException();
             }            
         }

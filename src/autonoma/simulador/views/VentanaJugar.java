@@ -6,6 +6,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
 import autonoma.simulador.exception.ApagadoNoPuedeFrenarException;
+import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
@@ -229,11 +230,9 @@ public class VentanaJugar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         }catch(ApagadoNoPuedeFrenarException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
-        }catch(SeAccidentaraException e){
-            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
-            ventana.setVisible(true);
-            this.vehiculo.apagar();
-            velocidadActual.setText("");
+        }catch(ElVeiculoPatinaException e){
+            this.vehiculo.recuperarElControl();
+            this.actualiarValorActual();
         }
     }//GEN-LAST:event_jlbFrenarMouseClicked
 
