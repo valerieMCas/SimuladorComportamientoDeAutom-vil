@@ -4,12 +4,15 @@
  */
 package autonoma.simulador.views;
 
+import autonoma.simulador.exception.ArchivoExistenteException;
 import autonoma.simulador.models.ArchivoConfiguracion;
 import autonoma.simulador.models.Lector;
 import autonoma.simulador.models.LectorArchivoTextoPlano;
 import autonoma.simulador.models.Vehiculo;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -154,8 +157,9 @@ public class VentanaCargarConfi extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no existe.");
             }
+        } catch (ArchivoExistenteException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error al leer el archivo: " + ex.getMessage());
         }
     }
     }//GEN-LAST:event_btnConfiActionPerformed
