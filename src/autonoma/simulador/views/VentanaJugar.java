@@ -6,6 +6,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
 import autonoma.simulador.exception.SeAccidentaraException;
+import autonoma.simulador.exception.YaEstaEncendidoException;
 import autonoma.simulador.models.Vehiculo;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
@@ -224,8 +225,15 @@ public class VentanaJugar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnApagarMouseClicked
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
-        this.vehiculo.encender();
-        this.actualiarValorActual();
+        try{
+            this.vehiculo.encender();
+            VentanaEncendido ventana = new VentanaEncendido(this, true, this.vehiculo);
+            ventana.setVisible(true);
+            this.actualiarValorActual();
+        }catch(YaEstaEncendidoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        
     }//GEN-LAST:event_btnEncenderMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
