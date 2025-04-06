@@ -4,10 +4,13 @@
  */
 package autonoma.simulador.views;
 
+import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
+import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.models.Vehiculo;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -166,8 +169,20 @@ public class VentanaJugar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
-        VentanaAcelerar ventana = new VentanaAcelerar(this, true, this.vehiculo);
-        ventana.setVisible(true);
+        String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
+        try {
+            double incremento = Double.parseDouble(input);
+            vehiculo.acelerar(incremento);
+            VentanaAcelerar ventana = new VentanaAcelerar(this, true, this.vehiculo);
+            ventana.setVisible(true);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
+        }catch(ApagadoNoPuedeAcelerarException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }catch(SeAccidentaraException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_jlbAcelerarMouseClicked
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked

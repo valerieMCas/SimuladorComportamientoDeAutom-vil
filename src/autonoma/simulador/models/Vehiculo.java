@@ -106,12 +106,8 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
     public double acelerar(double incremento) {
-        try{
-            if(apagado){
-                throw new ApagadoNoPuedeAcelerarException();
-            }
-        }catch(ApagadoNoPuedeAcelerarException e){
-            System.out.println(e.getMessage());
+        if(apagado){
+            throw new ApagadoNoPuedeAcelerarException();
         }
         if (encendido) {
             velocidadActual += incremento;
@@ -120,15 +116,10 @@ public class Vehiculo {
             double limiteLlanta = llantas.getLimiteVelocidad();
 
             double limitePermitido = Math.min(limiteMotor, limiteLlanta);
-            try{
-                if (velocidadActual > limitePermitido) {
-                    throw new SeAccidentaraException();
-                }
-            }catch(SeAccidentaraException e){
-                System.out.println(e.getMessage());
-                this.apagar();
-            }
-            
+        
+            if (velocidadActual > limitePermitido) {
+                throw new SeAccidentaraException();
+            }            
         }
         return velocidadActual;
     }
