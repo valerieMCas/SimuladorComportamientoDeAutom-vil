@@ -54,8 +54,8 @@ public class ArchivoConfiguracion {
             throw new IOException("Archivo de configuración incompleto.");
         }
 
-        String tipoLlantas = lineas.get(0).trim();
-        String tipoMotor = lineas.get(1).trim();
+        String tipoLlantas = lineas.get(0).split("\\s+")[1].trim();
+        String tipoMotor = lineas.get(1).split("\\s+")[1].trim();
 
         Llanta llantas = crearLlantas(tipoLlantas);
         Motor motor = crearMotor(tipoMotor);
