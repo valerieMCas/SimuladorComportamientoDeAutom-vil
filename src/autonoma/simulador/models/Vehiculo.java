@@ -31,19 +31,28 @@ public class Vehiculo {
      * Inicializa los atributos con valores por defecto.
      */
     public Vehiculo() {
-        this.motor = motor;
-        this.llantas = llantas;
+        this.motor = null;
+        this.llantas = null;
         this.velocidadActual = 0.0;
         this.encendido = false;
         this.apagado = true;
         this.patinando = false;
     }
     
-    public Vehiculo(Llanta llantas, Motor motor){
+    public Vehiculo(Llanta llanta, Motor motor) {
         this.motor = motor;
+        this.llantas = llanta;
+    }   
+
+    public void setLlantas(Llanta llantas) {
         this.llantas = llantas;
     }
 
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+    
+    
     public double getVelocidadActual() {
         return velocidadActual;
     }

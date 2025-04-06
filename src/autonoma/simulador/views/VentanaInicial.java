@@ -5,6 +5,7 @@
 package autonoma.simulador.views;
 
 import autonoma.simulador.models.Vehiculo;
+import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
@@ -21,6 +22,7 @@ public class VentanaInicial extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        ReproductorSonido.reproducir("sonido juego.wav");
         
         try{
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/CarroFondo.png")).getImage());
@@ -83,9 +85,11 @@ public class VentanaInicial extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        ReproductorSonido.detener();
+        this.dispose();
         VentanaJugar ventana = new VentanaJugar(this, true, this.vehiculo);
         ventana.setVisible(true);
-        this.dispose();
+        
         
     }//GEN-LAST:event_jLabel1MouseClicked
 
