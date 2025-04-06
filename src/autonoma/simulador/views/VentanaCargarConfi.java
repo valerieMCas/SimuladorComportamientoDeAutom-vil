@@ -134,6 +134,7 @@ public class VentanaCargarConfi extends javax.swing.JDialog {
 
         Lector lector = new LectorArchivoTextoPlano();
         ArchivoConfiguracion config = new ArchivoConfiguracion(lector);
+        this.vehiculo = vehiculo;
 
         try {
             if (config.archivoExiste(archivo.getAbsolutePath())) {

@@ -169,6 +169,7 @@ public class VentanaJugar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
+        vehiculo.encender();
         String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
         try {
             double incremento = Double.parseDouble(input);
@@ -182,6 +183,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }catch(SeAccidentaraException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
+            this.vehiculo.apagar();
         }
     }//GEN-LAST:event_jlbAcelerarMouseClicked
 

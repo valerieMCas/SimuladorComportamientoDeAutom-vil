@@ -31,6 +31,8 @@ public class Vehiculo {
      * Inicializa los atributos con valores por defecto.
      */
     public Vehiculo() {
+        this.motor = motor;
+        this.llantas = llantas;
         this.velocidadActual = 0.0;
         this.encendido = false;
         this.apagado = true;
