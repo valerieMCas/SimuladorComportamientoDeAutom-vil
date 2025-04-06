@@ -73,6 +73,11 @@ public class VentanaJugar extends javax.swing.JDialog {
         });
 
         btnEncender.setBackground(new java.awt.Color(0, 0, 0));
+        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseClicked(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/encender_40px.gif"))); // NOI18N
@@ -95,6 +100,11 @@ public class VentanaJugar extends javax.swing.JDialog {
         );
 
         btnApagar.setBackground(new java.awt.Color(0, 0, 0));
+        btnApagar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnApagarMouseClicked(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/apagar_40px.gif"))); // NOI18N
 
@@ -184,8 +194,6 @@ public class VentanaJugar extends javax.swing.JDialog {
         velocidadActual.setText("Velocidad actual: " + this.vehiculo.getVelocidadActual() + " km/h");
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
-        vehiculo.encender();
-        this.actualiarValorActual();
         String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
         try {
             double incremento = Double.parseDouble(input);
@@ -209,6 +217,16 @@ public class VentanaJugar extends javax.swing.JDialog {
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked
         // Programar cuando frene
     }//GEN-LAST:event_jlbFrenarMouseClicked
+
+    private void btnApagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApagarMouseClicked
+        this.vehiculo.apagar();
+        velocidadActual.setText("");
+    }//GEN-LAST:event_btnApagarMouseClicked
+
+    private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
+        this.vehiculo.encender();
+        this.actualiarValorActual();
+    }//GEN-LAST:event_btnEncenderMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnApagar;
