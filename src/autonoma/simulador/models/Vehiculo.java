@@ -43,6 +43,10 @@ public class Vehiculo {
         this.motor = motor;
         this.llantas = llantas;
     }
+
+    public double getVelocidadActual() {
+        return velocidadActual;
+    }
     
     public Llanta getLlantas() {
         return llantas;
