@@ -166,7 +166,8 @@ public class VentanaJugar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
-        //programar cuanod acelere
+        VentanaAcelerar ventana = new VentanaAcelerar(this, true, this.vehiculo);
+        ventana.setVisible(true);
     }//GEN-LAST:event_jlbAcelerarMouseClicked
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked

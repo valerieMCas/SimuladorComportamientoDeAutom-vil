@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Kamii/Desktop/POO/TallerSimuladorCarro/SimuladorComportamientoDeAutom-vil/src/autonoma/simulador/views/VentanaPrincipal.java</file>
-            <file>file:/C:/Users/Kamii/Desktop/POO/TallerSimuladorCarro/SimuladorComportamientoDeAutom-vil/src/autonoma/simulador/models/Vehiculo.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/exception/ElVeiculoPatinaException.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/main/SimuladorAutomovilApp.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/exception/SeAccidentaraException.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/views/VentanaAcelerar.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/models/Vehiculo.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/views/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/exception/DetenidoException.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/views/VentanaInicial.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/views/VentanaJugar.java</file>
+            <file>file:/C:/Users/usuario/Documents/NetBeansProjects/SimuladorComportacientoAutomovil/src/autonoma/simulador/models/ArchivoConfiguracion.java</file>
         </group>
     </open-files>
 </project-private>
