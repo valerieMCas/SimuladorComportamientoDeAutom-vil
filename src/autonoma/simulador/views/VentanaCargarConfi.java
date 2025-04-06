@@ -9,6 +9,7 @@ import autonoma.simulador.models.ArchivoConfiguracion;
 import autonoma.simulador.models.Lector;
 import autonoma.simulador.models.LectorArchivoTextoPlano;
 import autonoma.simulador.models.Vehiculo;
+import autonoma.simulador.sounds.ReproductorSonido;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -137,11 +138,10 @@ public class VentanaCargarConfi extends javax.swing.JDialog {
 
         Lector lector = new LectorArchivoTextoPlano();
         ArchivoConfiguracion config = new ArchivoConfiguracion(lector);
-        this.vehiculo = vehiculo;
 
         try {
             if (config.archivoExiste(archivo.getAbsolutePath())) {
-                Vehiculo vehiculo = config.leerArchivo(archivo.getAbsolutePath());
+                this.vehiculo = config.leerArchivo(archivo.getAbsolutePath());
 
 
                 JOptionPane.showMessageDialog(this, 
@@ -150,18 +150,20 @@ public class VentanaCargarConfi extends javax.swing.JDialog {
                     "Motor: " + vehiculo.getMotor().getNombre());
 
                 
+                ReproductorSonido.detener();
+                this.dispose();
                 VentanaInicial nuevaVentana = new VentanaInicial(this, true, this.vehiculo); // Asegúrate que tenga ese constructor
                 nuevaVentana.setVisible(true);
-                this.dispose();
+                
 
             } else {
                 JOptionPane.showMessageDialog(this, "El archivo no existe.");
             }
-        } catch (ArchivoExistenteException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
+        }catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error leyendo el archivo: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
         }
-    }
+      }
     }//GEN-LAST:event_btnConfiActionPerformed
 
     private void btnConfiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiMouseClicked

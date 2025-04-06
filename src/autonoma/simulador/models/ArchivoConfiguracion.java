@@ -50,7 +50,7 @@ public class ArchivoConfiguracion {
     public Vehiculo leerArchivo(String ruta) throws IOException {
         ArrayList<String> lineas = lector.leer(ruta);
 
-        if (lineas.size() < 2) {
+        if (lineas.size() < 2 || lineas.get(0).split("\\s+").length < 2 || lineas.get(1).split("\\s+").length < 2) {
             throw new IOException("Archivo de configuración incompleto.");
         }
 

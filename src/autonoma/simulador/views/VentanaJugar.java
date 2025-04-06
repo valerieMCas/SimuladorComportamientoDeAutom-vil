@@ -8,7 +8,6 @@ import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
 import autonoma.simulador.models.Vehiculo;
-import java.awt.Frame;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -208,7 +207,8 @@ public class VentanaJugar extends javax.swing.JDialog {
         }catch(ApagadoNoPuedeAcelerarException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }catch(SeAccidentaraException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
+            ventana.setVisible(true);
             this.vehiculo.apagar();
         }
         this.actualiarValorActual();
