@@ -167,15 +167,12 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de frenar bruscamente.
      */
     public double frenarBruscamente(double decremento) {
-        try{
-            if(velocidadActual<decremento){
-                throw new ElVeiculoPatinaException();
-            }
-        }catch(ElVeiculoPatinaException e){
-            System.out.println(e.getMessage());
-            patinando=true;
+        
+        if(velocidadActual<decremento){
             this.recuperarElControl();
+            throw new ElVeiculoPatinaException();
         }
+        
         if (velocidadActual > 0) {
             velocidadActual -= decremento * 2;
             if (velocidadActual < 0) {
