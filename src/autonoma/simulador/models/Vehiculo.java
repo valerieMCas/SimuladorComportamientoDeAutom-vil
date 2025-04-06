@@ -42,6 +42,13 @@ public class Vehiculo {
         this.llantas = llantas;
     }
     
+    public Llanta getLlantas() {
+        return llantas;
+    }
+
+    public Motor getMotor() {
+        return motor;
+    }
 
     /**
      * Metodo que permite encender el vehiculo.

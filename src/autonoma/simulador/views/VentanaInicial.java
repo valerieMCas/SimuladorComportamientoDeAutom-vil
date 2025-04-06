@@ -6,6 +6,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 
 /**
  *
@@ -16,7 +17,7 @@ public class VentanaInicial extends javax.swing.JDialog {
     /**
      * Creates new form VentanaInicial
      */
-    public VentanaInicial(java.awt.Frame parent, boolean modal,Vehiculo vehiculo) {
+    public VentanaInicial(JDialog parent, boolean modal,Vehiculo vehiculo) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -84,6 +85,7 @@ public class VentanaInicial extends javax.swing.JDialog {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         VentanaJugar ventana = new VentanaJugar(this, true, this.vehiculo);
         ventana.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_jLabel1MouseClicked
 
