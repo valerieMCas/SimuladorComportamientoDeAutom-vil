@@ -39,7 +39,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/autonoma/simulador/gifs/converted_499x499.gif"/>
+          <Image iconType="3" name="/autonoma/simulador/gifs/converted_499x499_slow.gif"/>
         </Property>
       </Properties>
       <Events>
