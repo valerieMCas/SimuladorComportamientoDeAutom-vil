@@ -198,7 +198,7 @@ public class VentanaJugar extends javax.swing.JDialog {
         velocidadActual.setText("Velocidad actual: " + this.vehiculo.getVelocidadActual() + " km/h");
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
-        String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
+        String input = JOptionPane.showInputDialog(this, "¿Cuánto desea acelerar?");
         try {
             double incremento = Double.parseDouble(input);
             vehiculo.acelerar(incremento);
@@ -213,8 +213,9 @@ public class VentanaJugar extends javax.swing.JDialog {
         }catch(SeAccidentaraException e){
             VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
             ventana.setVisible(true);
-            this.vehiculo.apagar();
+            JOptionPane.showMessageDialog(this, "Sobre paso el limite permitido y se accidento");
             velocidadActual.setText("");
+            
         }
         
 
@@ -233,6 +234,8 @@ public class VentanaJugar extends javax.swing.JDialog {
         }catch(ElVeiculoPatinaException e){
             this.vehiculo.recuperarElControl();
             this.actualiarValorActual();
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, "Patino ya que supero el limite de llantas");
         }
     }//GEN-LAST:event_jlbFrenarMouseClicked
 

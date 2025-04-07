@@ -38,12 +38,28 @@ public class Vehiculo {
         this.apagado = true;
         this.patinando = false;
     }
+
+    public void setApagado(boolean apagado) {
+        this.apagado = apagado;
+    }
     
     public Vehiculo(Llanta llanta, Motor motor) {
         this.motor = motor;
         this.llantas = llanta;
     }   
 
+    public void setEncendido(boolean encendido) {
+        this.encendido = encendido;
+    }
+
+    public void setVelocidadActual(double velocidadActual) {
+        this.velocidadActual = velocidadActual;
+    }
+    
+    public void setPatinando(boolean patinando) {
+        this.patinando = patinando;
+    }
+    
     public void setLlantas(Llanta llantas) {
         this.llantas = llantas;
     }
@@ -79,7 +95,7 @@ public class Vehiculo {
             apagado = false;
             return true;
         }
-        return false;
+        return encendido;
     }
 
     /**
@@ -97,13 +113,13 @@ public class Vehiculo {
             
         }
 
-        else if (encendido) {
+        else if (!encendido) {
             encendido = false;
             apagado = true;
             velocidadActual = 0.0;
             return true;
         }
-        return false;
+        return apagado;
     }
 
     /**
@@ -114,7 +130,7 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
     public double acelerar(double incremento) {
-        if(apagado){
+        if(!encendido){
             throw new ApagadoNoPuedeAcelerarException();
         }
         else if (encendido) {
@@ -126,7 +142,6 @@ public class Vehiculo {
             double limitePermitido = Math.min(limiteMotor, limiteLlanta);
         
             if (velocidadActual > limitePermitido) {
-                apagar();
                 throw new SeAccidentaraException();
             }            
         }
@@ -168,15 +183,12 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de frenar bruscamente.
      */
     public double frenarBruscamente(double decremento) {
-        try{
-            if(velocidadActual<decremento){
-                throw new ElVeiculoPatinaException();
-            }
-        }catch(ElVeiculoPatinaException e){
-            System.out.println(e.getMessage());
-            patinando=true;
+        
+        if(velocidadActual<decremento){
             this.recuperarElControl();
+            throw new ElVeiculoPatinaException();
         }
+        
         if (velocidadActual > 0) {
             velocidadActual -= decremento * 2;
             if (velocidadActual < 0) {
