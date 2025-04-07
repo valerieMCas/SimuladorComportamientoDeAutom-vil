@@ -4,6 +4,7 @@ import autonoma.simulador.models.Vehiculo;
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -79,6 +80,9 @@ public class VentanaAccidentar extends javax.swing.JDialog {
 
     private void accidentarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accidentarMouseClicked
         ReproductorSonido.detener();
+        this.vehiculo.setApagado(true);
+        this.vehiculo.setEncendido(false);
+        this.vehiculo.setVelocidadActual(0);
         this.dispose();
     }//GEN-LAST:event_accidentarMouseClicked
 

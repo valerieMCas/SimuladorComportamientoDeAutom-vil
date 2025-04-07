@@ -5,11 +5,17 @@
 package autonoma.simulador.views;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
+import autonoma.simulador.exception.ApagadoNoPuedeFrenarException;
+import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
+import autonoma.simulador.exception.YaEstaApagadoException;
+import autonoma.simulador.exception.YaEstaEncendidoException;
 import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import java.awt.event.MouseEvent;
+
 
 /**
  *
@@ -194,45 +200,107 @@ public class VentanaJugar extends javax.swing.JDialog {
         velocidadActual.setText("Velocidad actual: " + this.vehiculo.getVelocidadActual() + " km/h");
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
-        String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
-
-        if (input == null) {
-            return;
-        }
-
         try {
+            if (!vehiculo.estaEncendido()) {
+                throw new ApagadoNoPuedeAcelerarException();
+            }
+
+            String input = JOptionPane.showInputDialog(this, "¿Cuánto desea acelerar?");
+            if (input == null || input.trim().isEmpty()) {
+                return;
+            }
+
             double incremento = Double.parseDouble(input.trim());
+            if (incremento <= 0) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un número mayor que cero.");
+                return;
+            }
             vehiculo.acelerar(incremento);
+
             VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad(this, true, this.vehiculo);
             ventana.setVisible(true);
+
+            this.actualiarValorActual();
+
+        } catch (ApagadoNoPuedeAcelerarException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
-        } catch(ApagadoNoPuedeAcelerarException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch(SeAccidentaraException e){
-            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
+        } catch (SeAccidentaraException e) {
+            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.vehiculo);
             ventana.setVisible(true);
-            this.vehiculo.apagar();
+            JOptionPane.showMessageDialog(this, "Sobrepasó el límite permitido y se accidentó.");
+            velocidadActual.setText("");
         }
-
-        this.actualiarValorActual();
 
     }//GEN-LAST:event_jlbAcelerarMouseClicked
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked
-        // Programar cuando frene
+        try {
+            if (!vehiculo.estaEncendido()) {
+                throw new ApagadoNoPuedeFrenarException();
+            }
+
+            String input = JOptionPane.showInputDialog(this, "¿Cuánto desea frenar?");
+            if (input == null || input.trim().isEmpty()) {
+                return;
+            }
+
+            double decremento = Double.parseDouble(input.trim());
+
+            if (decremento <= 0) {
+                JOptionPane.showMessageDialog(this, "Ingrese un valor mayor a 0.");
+                return;
+            }
+
+            if (decremento > 30) {
+                vehiculo.frenarBruscamente(decremento);
+            } else {
+                vehiculo.frenar(decremento);
+            }
+
+            this.actualiarValorActual();
+
+        } catch (ApagadoNoPuedeFrenarException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
+        } catch (ElVeiculoPatinaException e) {
+            this.actualiarValorActual(); 
+            VentanaPatinar ventana = new VentanaPatinar(this, true, this.vehiculo);
+            ventana.setVisible(true);
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            this.vehiculo.recuperarElControl();
+        }
     }//GEN-LAST:event_jlbFrenarMouseClicked
 
     private void btnApagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApagarMouseClicked
-        this.vehiculo.apagar();
-        velocidadActual.setText("");
+        try{
+            this.vehiculo.apagar();
+            velocidadActual.setText("");
+        }catch(YaEstaApagadoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }catch(SeAccidentaraException e){
+            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
+            ventana.setVisible(true);
+            JOptionPane.showMessageDialog(this, "se apago en una velocidad superios a 60km/h y se accidento");
+            velocidadActual.setText("");
+        }
+        
     }//GEN-LAST:event_btnApagarMouseClicked
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
+
+    try {
         this.vehiculo.encender();
+        this.actualiarValorActual();
         VentanaEncender ventana = new VentanaEncender(this, true, this.vehiculo);
         ventana.setVisible(true);
-        this.actualiarValorActual();
+    } catch (YaEstaEncendidoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+        
+
     }//GEN-LAST:event_btnEncenderMouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
