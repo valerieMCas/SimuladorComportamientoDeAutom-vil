@@ -245,6 +245,11 @@ public class VentanaJugar extends javax.swing.JDialog {
             velocidadActual.setText("");
         }catch(YaEstaApagadoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
+        }catch(SeAccidentaraException e){
+            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
+            ventana.setVisible(true);
+            JOptionPane.showMessageDialog(this, "se apago en una velocidad superios a 60km/h y se accidento");
+            velocidadActual.setText("");
         }
         
     }//GEN-LAST:event_btnApagarMouseClicked
