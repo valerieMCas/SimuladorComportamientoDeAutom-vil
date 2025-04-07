@@ -195,21 +195,26 @@ public class VentanaJugar extends javax.swing.JDialog {
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
         String input = JOptionPane.showInputDialog(rootPane, "¿Cuánto desea acelerar?");
-        try {
-            double incremento = Double.parseDouble(input);
-            vehiculo.acelerar(incremento);
-            VentanaAcelerar ventana = new VentanaAcelerar(this, true, this.vehiculo);
-            ventana.setVisible(true);
 
+        if (input == null) {
+            return;
+        }
+
+        try {
+            double incremento = Double.parseDouble(input.trim());
+            vehiculo.acelerar(incremento);
+            VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad(this, true, this.vehiculo);
+            ventana.setVisible(true);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
-        }catch(ApagadoNoPuedeAcelerarException e){
+        } catch(ApagadoNoPuedeAcelerarException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
-        }catch(SeAccidentaraException e){
+        } catch(SeAccidentaraException e){
             VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
             ventana.setVisible(true);
             this.vehiculo.apagar();
         }
+
         this.actualiarValorActual();
 
     }//GEN-LAST:event_jlbAcelerarMouseClicked
@@ -225,6 +230,8 @@ public class VentanaJugar extends javax.swing.JDialog {
 
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
         this.vehiculo.encender();
+        VentanaEncender ventana = new VentanaEncender(this, true, this.vehiculo);
+        ventana.setVisible(true);
         this.actualiarValorActual();
     }//GEN-LAST:event_btnEncenderMouseClicked
     

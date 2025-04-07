@@ -11,18 +11,19 @@ import javax.swing.JDialog;
 
 /**
  *
- * @author usuario
+ * @author Kamii
  */
-public class VentanaAcelerar extends javax.swing.JDialog {
+public class VentanaAumentarVelocidad extends javax.swing.JDialog {
     private Vehiculo vehiculo;
     /**
-     * Creates new form VentanaAcelerar
+     * Creates new form VentanaAumentarVelocidad
      */
-    public VentanaAcelerar(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaAumentarVelocidad(JDialog parent, boolean modal, Vehiculo vehiculo) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        ReproductorSonido.reproducir("motor.wav");
+        ReproductorSonido.reproducir("carroAcelerando.wav");
+        
         try{
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/simulador/images/CarroFondo.png")).getImage());
         }catch(Exception e){
@@ -40,43 +41,52 @@ public class VentanaAcelerar extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        tlbAcelerar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/gifs/motorAcelerar.gif"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tlbAcelerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/gifs/aumentarVelocidad.gif"))); // NOI18N
+        tlbAcelerar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                tlbAcelerarMouseClicked(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tlbAcelerar)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tlbAcelerar)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        ReproductorSonido.detener();
-        this.dispose();
-    }//GEN-LAST:event_jLabel1MouseClicked
-    
-    
-    
+    private void tlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tlbAcelerarMouseClicked
+    ReproductorSonido.detener();
+    this.dispose();        
+    }//GEN-LAST:event_tlbAcelerarMouseClicked
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel tlbAcelerar;
     // End of variables declaration//GEN-END:variables
 }

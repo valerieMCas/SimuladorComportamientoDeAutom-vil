@@ -4,7 +4,6 @@
  */
 package autonoma.simulador.views;
 
-import autonoma.simulador.exception.ArchivoExistenteException;
 import autonoma.simulador.models.ArchivoConfiguracion;
 import autonoma.simulador.models.Lector;
 import autonoma.simulador.models.LectorArchivoTextoPlano;
@@ -12,8 +11,6 @@ import autonoma.simulador.models.Vehiculo;
 import autonoma.simulador.sounds.ReproductorSonido;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -152,7 +149,7 @@ public class VentanaCargarConfi extends javax.swing.JDialog {
                 
                 ReproductorSonido.detener();
                 this.dispose();
-                VentanaInicial nuevaVentana = new VentanaInicial(this, true, this.vehiculo); // Asegúrate que tenga ese constructor
+                VentanaInicial nuevaVentana = new VentanaInicial(this, true, this.vehiculo); 
                 nuevaVentana.setVisible(true);
                 
 
