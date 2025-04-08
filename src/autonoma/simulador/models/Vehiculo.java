@@ -187,23 +187,12 @@ public class Vehiculo {
      * @param decremento La cantidad de velocidad a reducir, multiplicada por 2.
      * @return La nueva velocidad actual del vehiculo despues de frenar bruscamente.
      */
-public double frenarBruscamente(double decremento) throws ElVeiculoPatinaException {
-    double limiteLlanta = llantas.getLimiteVelocidad();
+    public void frenarBruscamente(double decremento) throws ElVeiculoPatinaException, ApagadoNoPuedeFrenarException, DetenidoException {
 
-    if (velocidadActual > limiteLlanta && decremento > 30) {
-        patinando = true;
-        throw new ElVeiculoPatinaException();
+        frenar(decremento); // usa tu método actual
+
+    
     }
-
-    if (velocidadActual > 0) {
-        velocidadActual -= decremento * 2;
-        if (velocidadActual < 0) {
-            velocidadActual = 0;
-        }
-    }
-
-    return velocidadActual;
-}
     
     public boolean estaEncendido() {
         return this.encendido;
