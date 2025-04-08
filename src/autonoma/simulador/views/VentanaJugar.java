@@ -221,6 +221,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             ventana.setVisible(true);
 
             this.actualiarValorActual();
+            
 
         } catch (ApagadoNoPuedeAcelerarException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -253,8 +254,11 @@ public class VentanaJugar extends javax.swing.JDialog {
                 return;
             }
 
+            
             if (decremento > 30) {
                 vehiculo.frenarBruscamente(decremento);
+                VentanaPatinar ventana = new VentanaPatinar(this, true, this.vehiculo);
+                ventana.setVisible(true);
             } else {
                 vehiculo.frenar(decremento);
             }
