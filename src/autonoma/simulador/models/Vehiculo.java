@@ -21,9 +21,6 @@ public class Vehiculo {
      */
     private Motor motor;
     private Llanta llantas;
-    private double velocidadActual;
-    private boolean encendido;
-    private boolean apagado;
     private boolean patinando;
 
     /**
@@ -33,28 +30,13 @@ public class Vehiculo {
     public Vehiculo() {
         this.motor = null;
         this.llantas = null;
-        this.velocidadActual = 0.0;
-        this.encendido = false;
-        this.apagado = true;
         this.patinando = false;
     }
 
-    public void setApagado(boolean apagado) {
-        this.apagado = apagado;
-    }
-    
     public Vehiculo(Llanta llanta, Motor motor) {
         this.motor = motor;
         this.llantas = llanta;
     }   
-
-    public void setEncendido(boolean encendido) {
-        this.encendido = encendido;
-    }
-
-    public void setVelocidadActual(double velocidadActual) {
-        this.velocidadActual = velocidadActual;
-    }
     
     public void setPatinando(boolean patinando) {
         this.patinando = patinando;
@@ -68,11 +50,6 @@ public class Vehiculo {
         this.motor = motor;
     }
     
-    
-    public double getVelocidadActual() {
-        return velocidadActual;
-    }
-    
     public Llanta getLlantas() {
         return llantas;
     }
@@ -81,47 +58,7 @@ public class Vehiculo {
         return motor;
     }
 
-    /**
-     * Metodo que permite encender el vehiculo.
-     * Si el vehiculo ya esta encendido, se muestra un mensaje indicando esto.
-     */
-    public boolean encender() {
-        
-        if(encendido){
-            throw new YaEstaEncendidoException();       
-        }
-        else if (!encendido) {
-            encendido = true;
-            apagado = false;
-            return true;
-        }
-        return encendido;
-    }
-
-    /**
-     * Metodo que permite apagar el vehiculo.
-     * Al apagarlo, la velocidad se establece en 0.
-     * Si el vehiculo ya esta apagado, se muestra un mensaje indicando esto.
-     */
-    public boolean apagar() {
-
-        if(apagado){
-            throw new YaEstaApagadoException();
-        }
-        else if(this.velocidadActual>60.0){
-            throw new SeAccidentaraException();
-            
-        }
-
-        else if (!encendido) {
-            encendido = false;
-            apagado = true;
-            velocidadActual = 0.0;
-            return true;
-        }
-        return apagado;
-    }
-
+    
     /**
      * Metodo que permite acelerar el vehiculo.
      * Solo se puede acelerar si el vehiculo esta encendido.
@@ -130,22 +67,21 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
     public double acelerar(double incremento) {
-        if(!encendido){
+         if (!motor.isEncendido()) {
             throw new ApagadoNoPuedeAcelerarException();
         }
-        else if (encendido) {
-            velocidadActual += incremento;
 
-            double limiteMotor = motor.obtenerVelocidadMaxima();
-            double limiteLlanta = llantas.getLimiteVelocidad();
+        double nuevaVelocidad = motor.getVelocidadActual() + incremento;
+        double limiteMotor = motor.getObtenerVelocidadMaxima();
+        double limiteLlanta = llantas.getLimiteVelocidad();
+        double limitePermitido = Math.min(limiteMotor, limiteLlanta);
 
-            double limitePermitido = Math.min(limiteMotor, limiteLlanta);
-        
-            if (velocidadActual > limitePermitido) {
-                throw new SeAccidentaraException();
-            }            
+        if (nuevaVelocidad > limitePermitido) {
+            throw new SeAccidentaraException();
         }
-        return velocidadActual;
+
+        motor.setVelocidadActual(nuevaVelocidad);
+        return nuevaVelocidad;
     }
 
     /**
@@ -156,29 +92,35 @@ public class Vehiculo {
      * @return La nueva velocidad actual del vehiculo despues de frenar.
      */
     public double frenar(double decremento) {
-        if(apagado){
+        if (motor.isApagado()) {
             throw new ApagadoNoPuedeFrenarException();
         }
-        else if(velocidadActual==0){
+
+        double velocidadActual = motor.getVelocidadActual();
+
+        if (velocidadActual == 0) {
             throw new DetenidoException();
         }
-        else if(velocidadActual>llantas.getLimiteVelocidad()){
+
+        if (velocidadActual > llantas.getLimiteVelocidad()) {
+            patinando = true;
             throw new ElVeiculoPatinaException();
         }
 
-        else if (velocidadActual > 0) {
-            velocidadActual -= decremento;
-            if (velocidadActual < 0) {
-                velocidadActual = 0;
-            }
+        velocidadActual -= decremento;
+        if (velocidadActual < 0) {
+            velocidadActual = 0;
         }
+
+        motor.setVelocidadActual(velocidadActual);
         return velocidadActual;
     }
     public void recuperarElControl() {
         if (patinando) {
-            velocidadActual = 0;
+            motor.setVelocidadActual(0.0);
             patinando = false;
         }
+
     }
     /**
      * Metodo que permite frenar bruscamente el vehiculo.
@@ -195,12 +137,13 @@ public class Vehiculo {
     }
     
     public boolean estaEncendido() {
-        return this.encendido;
+        return motor != null && motor.isEncendido();
     }
-    
+
     public boolean estaApagado() {
-        return this.apagado;
+        return motor != null && motor.isApagado();
     }
+
 }
 
 

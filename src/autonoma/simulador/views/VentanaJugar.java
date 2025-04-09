@@ -10,6 +10,7 @@ import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
+import autonoma.simulador.models.Motor;
 import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -23,10 +24,11 @@ import java.awt.event.MouseEvent;
  */
 public class VentanaJugar extends javax.swing.JDialog {
     private Vehiculo vehiculo;
+    private Motor motor;
     /**
      * Creates new form VentanaJugar
      */
-    public VentanaJugar(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaJugar(JDialog parent, boolean modal, Vehiculo vehiculo,Motor motor) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -37,6 +39,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             System.out.println("imagen no encontrada");
         }
         this.vehiculo = vehiculo;
+        this.motor = motor;
     }
 
     /**
@@ -197,11 +200,11 @@ public class VentanaJugar extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void actualiarValorActual(){
-        velocidadActual.setText("Velocidad actual: " + this.vehiculo.getVelocidadActual() + " km/h");
+        velocidadActual.setText("Velocidad actual: " + this.motor.getVelocidadActual() + " km/h");
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
         try {
-            if (!vehiculo.estaEncendido()) {
+            if (!motor.isEncendido()) {
                 throw new ApagadoNoPuedeAcelerarException();
             }
 
@@ -228,7 +231,7 @@ public class VentanaJugar extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         } catch (SeAccidentaraException e) {
-            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.vehiculo);
+            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.vehiculo, this.motor);
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, "Sobrepasó el límite permitido y se accidentó.");
             velocidadActual.setText("");
@@ -238,7 +241,7 @@ public class VentanaJugar extends javax.swing.JDialog {
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked
         try {
-            if (!vehiculo.estaEncendido()) {
+            if (!motor.isEncendido()) {
                 throw new ApagadoNoPuedeFrenarException();
             }
 
@@ -280,13 +283,11 @@ public class VentanaJugar extends javax.swing.JDialog {
 
     private void btnApagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApagarMouseClicked
         try{
-            this.vehiculo.apagar();
+            this.motor.apagar();
             velocidadActual.setText("");
         }catch(YaEstaApagadoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }catch(SeAccidentaraException e){
-            VentanaAccidentar ventana = new  VentanaAccidentar(this, true, this.vehiculo);
-            ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, "se apago en una velocidad superios a 60km/h y se accidento");
             velocidadActual.setText("");
         }
@@ -296,7 +297,7 @@ public class VentanaJugar extends javax.swing.JDialog {
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
 
     try {
-        this.vehiculo.encender();
+        this.motor.encender();
         this.actualiarValorActual();
         VentanaEncender ventana = new VentanaEncender(this, true, this.vehiculo);
         ventana.setVisible(true);

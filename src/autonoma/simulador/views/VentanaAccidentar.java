@@ -1,5 +1,6 @@
 package autonoma.simulador.views;
 
+import autonoma.simulador.models.Motor;
 import autonoma.simulador.models.Vehiculo;
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
@@ -12,10 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class VentanaAccidentar extends javax.swing.JDialog {
     private Vehiculo vehiculo;
+    private Motor motor;
     /**
      * Creates new form VentanaAccidentar
      */
-    public VentanaAccidentar(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaAccidentar(JDialog parent, boolean modal, Vehiculo vehiculo, Motor motor) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -26,6 +28,7 @@ public class VentanaAccidentar extends javax.swing.JDialog {
             System.out.println("imagen no encontrada");
         }
         this.vehiculo = vehiculo;
+        this.motor = motor;
     }
 
     /**
@@ -80,9 +83,9 @@ public class VentanaAccidentar extends javax.swing.JDialog {
 
     private void accidentarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accidentarMouseClicked
         ReproductorSonido.detener();
-        this.vehiculo.setApagado(true);
-        this.vehiculo.setEncendido(false);
-        this.vehiculo.setVelocidadActual(0);
+        this.motor.setApagado(true);
+        this.motor.setEncendido(false);
+        this.motor.setVelocidadActual(0);
         this.dispose();
     }//GEN-LAST:event_accidentarMouseClicked
 
