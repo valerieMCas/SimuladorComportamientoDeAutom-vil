@@ -136,14 +136,7 @@ public class Vehiculo {
     
     }
     
-    public boolean estaEncendido() {
-        return motor != null && motor.isEncendido();
-    }
-
-    public boolean estaApagado() {
-        return motor != null && motor.isApagado();
-    }
-
+    
 }
 
 

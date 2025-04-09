@@ -5,28 +5,30 @@ package autonoma.simulador.models;
  * @author valerie
  */
 public class Llanta {
-    private String getTipo;
-    private double getLimiteVelocidad;
+    private String tipo;
+    private double limiteVelocidad;
 
-    public Llanta(String getTipo, double getLimiteVelocidad) {
-        this.getTipo = getTipo;
-        this.getLimiteVelocidad = getLimiteVelocidad;
+    public Llanta(String tipo, double limiteVelocidad) {
+        this.tipo = tipo;
+        this.limiteVelocidad = limiteVelocidad;
     }
 
-    public String getGetTipo() {
-        return getTipo;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setGetTipo(String getTipo) {
-        this.getTipo = getTipo;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public double getGetLimiteVelocidad() {
-        return getLimiteVelocidad;
+    public double getLimiteVelocidad() {
+        return limiteVelocidad;
     }
 
-    public void setGetLimiteVelocidad(double getLimiteVelocidad) {
-        this.getLimiteVelocidad = getLimiteVelocidad;
+    public void setLimiteVelocidad(double limiteVelocidad) {
+        this.limiteVelocidad = limiteVelocidad;
     }
+
+    
     
 }
