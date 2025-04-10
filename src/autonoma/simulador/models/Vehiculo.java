@@ -79,10 +79,8 @@ public class Vehiculo {
 
         double nuevaVelocidad = motor.getVelocidadActual() + incremento;
         double limiteMotor = motor.getObtenerVelocidadMaxima();
-        double limiteLlanta = llantas.getLimiteVelocidad();
-        double limitePermitido = Math.min(limiteMotor, limiteLlanta);
 
-        if (nuevaVelocidad > limitePermitido) {
+        if (nuevaVelocidad > limiteMotor) {
             throw new SeAccidentaraException();
         }
 
