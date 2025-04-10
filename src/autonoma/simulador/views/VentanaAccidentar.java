@@ -1,23 +1,22 @@
 package autonoma.simulador.views;
 
 import autonoma.simulador.models.Motor;
-import autonoma.simulador.models.Vehiculo;
+
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+
 
 /**
  *
  * @author Kamii
  */
-public class VentanaAccidentar extends javax.swing.JDialog {
+public class VentanaAccidentar extends JFrame{
     private Motor motor;
     /**
      * Creates new form VentanaAccidentar
      */
-    public VentanaAccidentar(JDialog parent, boolean modal, Motor motor) {
-        super(parent, modal);
+    public VentanaAccidentar(Motor motor) {
         initComponents();
         this.setLocationRelativeTo(null);
         ReproductorSonido.reproducir("sonidoAccidente.wav");

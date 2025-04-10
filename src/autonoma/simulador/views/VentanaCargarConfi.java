@@ -6,6 +6,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.models.Escritor;
 import autonoma.simulador.models.EscritorArchivoTextoPlano;
+import autonoma.simulador.models.Simulador;
 import autonoma.simulador.models.Vehiculo;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class VentanaCargarConfi extends JFrame{
     /**
      * Creates new form VentanaCargarConfi
      */
-    public VentanaCargarConfi(java.awt.Frame parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaCargarConfi(Vehiculo vehiculo) {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -168,6 +169,8 @@ public class VentanaCargarConfi extends JFrame{
         textoArchivo.add(sbMotor.toString());
         try{
             escritorArchivo.escribir(textoArchivo);
+            VentanaInicial ventana = new VentanaInicial(new Simulador(this.vehiculo));
+            ventana.setVisible(true);
             this.dispose();
         }catch (IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -178,7 +181,7 @@ public class VentanaCargarConfi extends JFrame{
     }//GEN-LAST:event_btnConfiActionPerformed
 
     private void btnConfiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiMouseClicked
-
+        
     }//GEN-LAST:event_btnConfiMouseClicked
 
     private void jComboBoxLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLlantasActionPerformed

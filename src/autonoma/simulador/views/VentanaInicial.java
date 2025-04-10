@@ -4,24 +4,22 @@
  */
 package autonoma.simulador.views;
 
-import autonoma.simulador.models.Motor;
+
 import autonoma.simulador.models.Simulador;
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
  * @author marti
  */
-public class VentanaInicial extends javax.swing.JDialog {
+public class VentanaInicial extends JFrame{
     private Simulador simulador;
-    private Motor motor;
     /**
      * Creates new form VentanaInicial
      */
-    public VentanaInicial(JDialog parent, boolean modal,Simulador simulador, Motor motor) {
-        super(parent, modal);
+    public VentanaInicial(Simulador simulador) {
         initComponents();
         this.setLocationRelativeTo(null);
         ReproductorSonido.reproducir("sonido juego.wav");
@@ -32,7 +30,6 @@ public class VentanaInicial extends javax.swing.JDialog {
             System.out.println("imagen no encontrada");
         }
         this.simulador = simulador;
-        this.motor = motor;
     }
 
     /**
@@ -90,7 +87,7 @@ public class VentanaInicial extends javax.swing.JDialog {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         ReproductorSonido.detener();
         this.dispose();
-        VentanaJugar ventana = new VentanaJugar(this, true, this.simulador, this.motor);
+        VentanaJugar ventana = new VentanaJugar(this.simulador);
         ventana.setVisible(true);
         
         

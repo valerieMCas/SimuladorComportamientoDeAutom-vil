@@ -80,7 +80,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciarMouseClicked
-        VentanaCargarConfi ventana = new VentanaCargarConfi(this, true, this.vehiculo);
+        VentanaCargarConfi ventana = new VentanaCargarConfi(this.vehiculo);
         ventana.setVisible(true);
         AudioClip Sound;
         Sound = java.applet.Applet.newAudioClip(getClass().getResource("autonoma/simulador/sounds/sonidoInicio.wav"));

@@ -4,23 +4,22 @@
  */
 package autonoma.simulador.views;
 
-import autonoma.simulador.models.Vehiculo;
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
 * @author Maria Camila Prada
 *@version 1.0.0
 * @since 2025-04-06
 */
-public class VentanaPatinar extends javax.swing.JDialog {
+public class VentanaPatinar extends JFrame{
 
     /**
      * Creates new form VentanaPatinar
      */
-    public VentanaPatinar(JDialog parent, boolean modal ) {
-        super(parent, modal);
+    public VentanaPatinar() {
         initComponents();
         this.setLocationRelativeTo(null);
         ReproductorSonido.reproducir("sonidoLlantasPatinan.wav");

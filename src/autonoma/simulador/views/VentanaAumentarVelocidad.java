@@ -4,22 +4,22 @@
  */
 package autonoma.simulador.views;
 
-import autonoma.simulador.models.Vehiculo;
+
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Kamii
  */
-public class VentanaAumentarVelocidad extends javax.swing.JDialog {
+public class VentanaAumentarVelocidad extends JFrame{
 
     /**
      * Creates new form VentanaAumentarVelocidad
      */
-    public VentanaAumentarVelocidad(JDialog parent, boolean modal) {
-        super(parent, modal);
+    public VentanaAumentarVelocidad() {
         initComponents();
         this.setLocationRelativeTo(null);
         ReproductorSonido.reproducir("carroAcelerando.wav");

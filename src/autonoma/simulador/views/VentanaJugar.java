@@ -12,25 +12,22 @@ import autonoma.simulador.exception.YaEstaApagadoException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
 import autonoma.simulador.models.Motor;
 import autonoma.simulador.models.Simulador;
-import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
 
 
 /**
  *
  * @author Kamii
  */
-public class VentanaJugar extends javax.swing.JDialog {
+public class VentanaJugar extends JFrame{
     private Simulador simulador;
     private Motor motor;
     /**
      * Creates new form VentanaJugar
      */
-    public VentanaJugar(JDialog parent, boolean modal, Simulador simulador, Motor motor) {
-        super(parent, modal);
+    public VentanaJugar(Simulador simulador) {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -40,7 +37,6 @@ public class VentanaJugar extends javax.swing.JDialog {
             System.out.println("imagen no encontrada");
         }
         this.simulador = simulador;
-        this.motor = motor;
     }
 
     /**
@@ -221,7 +217,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             }
             simulador.acelerarVehiculo(incremento);
 
-            VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad(this, true);
+            VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad();
             ventana.setVisible(true);
 
             this.actualiarValorActual();
@@ -232,7 +228,7 @@ public class VentanaJugar extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         } catch (SeAccidentaraException e) {
-            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.motor);
+            VentanaAccidentar ventana = new VentanaAccidentar(this.motor);
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, "Sobrepasó el límite permitido y se accidentó.");
             velocidadActual.setText("");
@@ -262,7 +258,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             try {
                 simulador.frenarBruscamenteVehiculo(decremento);
             } catch (ElVeiculoPatinaException e) {
-                VentanaPatinar ventana = new VentanaPatinar(this, true);
+                VentanaPatinar ventana = new VentanaPatinar();
                 ventana.setVisible(true);
             }
 
@@ -274,7 +270,7 @@ public class VentanaJugar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         } catch (ElVeiculoPatinaException e) {
             this.actualiarValorActual(); 
-            VentanaPatinar ventana = new VentanaPatinar(this, true);
+            VentanaPatinar ventana = new VentanaPatinar();
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, e.getMessage());
             this.simulador.recuperarControlVehiuclo();
@@ -299,7 +295,7 @@ public class VentanaJugar extends javax.swing.JDialog {
     try {
         this.simulador.encenderVehiculo();
         this.actualiarValorActual();
-        VentanaEncender ventana = new VentanaEncender(this, true);
+        VentanaEncender ventana = new VentanaEncender();
         ventana.setVisible(true);
     } catch (YaEstaEncendidoException e) {
         JOptionPane.showMessageDialog(this, e.getMessage());
