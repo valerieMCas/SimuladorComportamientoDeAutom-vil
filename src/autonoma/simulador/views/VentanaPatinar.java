@@ -15,11 +15,11 @@ import javax.swing.JDialog;
 * @since 2025-04-06
 */
 public class VentanaPatinar extends javax.swing.JDialog {
-    private Vehiculo vehiculo;
+
     /**
      * Creates new form VentanaPatinar
      */
-    public VentanaPatinar(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaPatinar(JDialog parent, boolean modal ) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,7 +29,7 @@ public class VentanaPatinar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo = vehiculo;
+ 
     }
 
     /**

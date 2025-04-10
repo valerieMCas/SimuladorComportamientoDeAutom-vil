@@ -12,12 +12,11 @@ import javax.swing.JOptionPane;
  * @author Kamii
  */
 public class VentanaAccidentar extends javax.swing.JDialog {
-    private Vehiculo vehiculo;
     private Motor motor;
     /**
      * Creates new form VentanaAccidentar
      */
-    public VentanaAccidentar(JDialog parent, boolean modal, Vehiculo vehiculo, Motor motor) {
+    public VentanaAccidentar(JDialog parent, boolean modal, Motor motor) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -27,7 +26,6 @@ public class VentanaAccidentar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo = vehiculo;
         this.motor = motor;
     }
 

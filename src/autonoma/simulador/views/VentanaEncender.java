@@ -14,11 +14,10 @@ import javax.swing.JDialog;
  * @author usuario
  */
 public class VentanaEncender extends javax.swing.JDialog {
-    private Vehiculo vehiculo;
     /**
      * Creates new form VentanaAcelerar
      */
-    public VentanaEncender(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaEncender(JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,7 +28,7 @@ public class VentanaEncender extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo = vehiculo;
+ 
     }
 
     /**

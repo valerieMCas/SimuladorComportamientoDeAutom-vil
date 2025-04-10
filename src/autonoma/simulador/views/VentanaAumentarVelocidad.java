@@ -14,11 +14,11 @@ import javax.swing.JDialog;
  * @author Kamii
  */
 public class VentanaAumentarVelocidad extends javax.swing.JDialog {
-    private Vehiculo vehiculo;
+
     /**
      * Creates new form VentanaAumentarVelocidad
      */
-    public VentanaAumentarVelocidad(JDialog parent, boolean modal, Vehiculo vehiculo) {
+    public VentanaAumentarVelocidad(JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -29,7 +29,7 @@ public class VentanaAumentarVelocidad extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo = vehiculo;
+
     }
 
     /**

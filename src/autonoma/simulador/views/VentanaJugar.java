@@ -11,6 +11,7 @@ import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
 import autonoma.simulador.models.Motor;
+import autonoma.simulador.models.Simulador;
 import autonoma.simulador.models.Vehiculo;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -23,12 +24,12 @@ import java.awt.event.MouseEvent;
  * @author Kamii
  */
 public class VentanaJugar extends javax.swing.JDialog {
-    private Vehiculo vehiculo;
+    private Simulador simulador;
     private Motor motor;
     /**
      * Creates new form VentanaJugar
      */
-    public VentanaJugar(JDialog parent, boolean modal, Vehiculo vehiculo,Motor motor) {
+    public VentanaJugar(JDialog parent, boolean modal, Simulador simulador, Motor motor) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -38,7 +39,7 @@ public class VentanaJugar extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.vehiculo = vehiculo;
+        this.simulador = simulador;
         this.motor = motor;
     }
 
@@ -204,7 +205,7 @@ public class VentanaJugar extends javax.swing.JDialog {
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
         try {
-            if (!motor.isEncendido()) {
+            if (!simulador.encenderVehiculo()) {
                 throw new ApagadoNoPuedeAcelerarException();
             }
 
@@ -218,9 +219,9 @@ public class VentanaJugar extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un número mayor que cero.");
                 return;
             }
-            vehiculo.acelerar(incremento);
+            simulador.acelerarVehiculo(incremento);
 
-            VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad(this, true, this.vehiculo);
+            VentanaAumentarVelocidad ventana = new VentanaAumentarVelocidad(this, true);
             ventana.setVisible(true);
 
             this.actualiarValorActual();
@@ -231,7 +232,7 @@ public class VentanaJugar extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         } catch (SeAccidentaraException e) {
-            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.vehiculo, this.motor);
+            VentanaAccidentar ventana = new VentanaAccidentar(this, true, this.motor);
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, "Sobrepasó el límite permitido y se accidentó.");
             velocidadActual.setText("");
@@ -241,7 +242,7 @@ public class VentanaJugar extends javax.swing.JDialog {
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked
         try {
-            if (!motor.isEncendido()) {
+            if (!simulador.encenderVehiculo()) {
                 throw new ApagadoNoPuedeFrenarException();
             }
 
@@ -259,11 +260,11 @@ public class VentanaJugar extends javax.swing.JDialog {
 
             
             if (decremento > 30) {
-                vehiculo.frenarBruscamente(decremento);
-                VentanaPatinar ventana = new VentanaPatinar(this, true, this.vehiculo);
+                simulador.frenarBruscamenteVehiculo(decremento);
+                VentanaPatinar ventana = new VentanaPatinar(this, true);
                 ventana.setVisible(true);
             } else {
-                vehiculo.frenar(decremento);
+                simulador.frenarVehiculo(decremento);
             }
 
             this.actualiarValorActual();
@@ -274,16 +275,16 @@ public class VentanaJugar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
         } catch (ElVeiculoPatinaException e) {
             this.actualiarValorActual(); 
-            VentanaPatinar ventana = new VentanaPatinar(this, true, this.vehiculo);
+            VentanaPatinar ventana = new VentanaPatinar(this, true);
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, e.getMessage());
-            this.vehiculo.recuperarElControl();
+            this.simulador.recuperarControlVehiuclo();
         }
     }//GEN-LAST:event_jlbFrenarMouseClicked
 
     private void btnApagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApagarMouseClicked
         try{
-            this.motor.apagar();
+            this.simulador.apagarVehiculo();
             velocidadActual.setText("");
         }catch(YaEstaApagadoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -297,9 +298,9 @@ public class VentanaJugar extends javax.swing.JDialog {
     private void btnEncenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseClicked
 
     try {
-        this.motor.encender();
+        this.simulador.encenderVehiculo();
         this.actualiarValorActual();
-        VentanaEncender ventana = new VentanaEncender(this, true, this.vehiculo);
+        VentanaEncender ventana = new VentanaEncender(this, true);
         ventana.setVisible(true);
     } catch (YaEstaEncendidoException e) {
         JOptionPane.showMessageDialog(this, e.getMessage());

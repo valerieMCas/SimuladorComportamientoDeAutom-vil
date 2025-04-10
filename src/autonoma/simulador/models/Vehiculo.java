@@ -58,6 +58,12 @@ public class Vehiculo {
         return motor;
     }
 
+    public void encender(){
+        this.motor.encender();
+    }
+    public void apagar(){
+        this.motor.apagar();
+    }
     
     /**
      * Metodo que permite acelerar el vehiculo.
