@@ -15,11 +15,10 @@ import javax.swing.JFrame;
  * @author marti
  */
 public class VentanaInicial extends JFrame{
-    private Simulador simulador;
     /**
      * Creates new form VentanaInicial
      */
-    public VentanaInicial(Simulador simulador) {
+    public VentanaInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
         ReproductorSonido.reproducir("sonido juego.wav");
@@ -29,7 +28,6 @@ public class VentanaInicial extends JFrame{
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.simulador = simulador;
     }
 
     /**
@@ -87,7 +85,7 @@ public class VentanaInicial extends JFrame{
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         ReproductorSonido.detener();
         this.dispose();
-        VentanaJugar ventana = new VentanaJugar(this.simulador);
+        VentanaJugar ventana = new VentanaJugar();
         ventana.setVisible(true);
         
         

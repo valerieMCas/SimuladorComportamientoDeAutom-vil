@@ -16,8 +16,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Kamii
+ * @author Camila Prada
+ * @version 1.0.0
+ * @since 2025-04-10
  */
 public class VentanaCargarConfi extends JFrame{
     private Vehiculo vehiculo;
@@ -169,7 +170,7 @@ public class VentanaCargarConfi extends JFrame{
         textoArchivo.add(sbMotor.toString());
         try{
             escritorArchivo.escribir(textoArchivo);
-            VentanaInicial ventana = new VentanaInicial(new Simulador(this.vehiculo));
+            VentanaInicial ventana = new VentanaInicial();
             ventana.setVisible(true);
             this.dispose();
         }catch (IOException e){

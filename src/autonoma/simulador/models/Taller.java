@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Esta clase valida la existencia del archivo y determina
  * los objetos de tipo Llantas y Motor a crear según los datos leídos.
  * 
- * @author Kamii
+ * @author Camila Prada
  * @version 1.0.0
  * @since 2025-04-04
  */

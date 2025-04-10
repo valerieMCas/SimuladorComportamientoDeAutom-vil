@@ -10,8 +10,13 @@ import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
 import autonoma.simulador.exception.YaEstaEncendidoException;
+import autonoma.simulador.models.LectorArchivoTextoPlano;
+import autonoma.simulador.models.Llanta;
 import autonoma.simulador.models.Motor;
 import autonoma.simulador.models.Simulador;
+import autonoma.simulador.models.Vehiculo;
+import java.io.IOException;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
@@ -27,7 +32,7 @@ public class VentanaJugar extends JFrame{
     /**
      * Creates new form VentanaJugar
      */
-    public VentanaJugar(Simulador simulador) {
+    public VentanaJugar() {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -36,9 +41,37 @@ public class VentanaJugar extends JFrame{
         }catch(Exception e){
             System.out.println("imagen no encontrada");
         }
-        this.simulador = simulador;
+        leerInformacionArchivo();
     }
 
+    
+    private void leerInformacionArchivo(){
+        LectorArchivoTextoPlano lector = new LectorArchivoTextoPlano();
+        Motor motorVehiculo = null;
+        Llanta llantasVehiculo = null;
+        try{
+            List<String> infoArchivo = lector.leer("config.txt");
+            String[] linea1 = infoArchivo.get(0).split(" ");
+            String[] linea2 = infoArchivo.get(1).split(" ");
+            System.out.println(linea1[2]+linea2[1]);
+            switch (linea1[2]){
+                case "Buenas": llantasVehiculo = new Llanta("Buena", 110);
+                case "Bonitas": llantasVehiculo = new Llanta("Bonitas", 70 );
+                case "Baratas": llantasVehiculo = new Llanta("Baratas", 50 );
+            }
+            
+            switch (linea2[1]){
+                case "1000": motorVehiculo = new Motor("1000 cc", 100);
+                case "2000": motorVehiculo = new Motor("2000 cc", 160);
+                case "3000": motorVehiculo = new Motor("3000 cc", 220);
+            }
+            
+            this.simulador = new Simulador(new Vehiculo(llantasVehiculo,motorVehiculo));
+            this.motor = motorVehiculo;
+        }catch (IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
