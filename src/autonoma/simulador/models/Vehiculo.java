@@ -136,7 +136,10 @@ public class Vehiculo {
     public void frenarBruscamente(double decremento) throws ElVeiculoPatinaException, ApagadoNoPuedeFrenarException, DetenidoException {
 
         frenar(decremento); // usa tu método actual
-
+        
+        if (decremento > 30) {
+            throw new ElVeiculoPatinaException(); // Esto indicará que el vehículo patina
+        }
     
     }
     

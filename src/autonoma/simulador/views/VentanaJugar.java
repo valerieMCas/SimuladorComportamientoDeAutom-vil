@@ -259,12 +259,11 @@ public class VentanaJugar extends javax.swing.JDialog {
             }
 
             
-            if (decremento > 30) {
+            try {
                 simulador.frenarBruscamenteVehiculo(decremento);
+            } catch (ElVeiculoPatinaException e) {
                 VentanaPatinar ventana = new VentanaPatinar(this, true);
                 ventana.setVisible(true);
-            } else {
-                simulador.frenarVehiculo(decremento);
             }
 
             this.actualiarValorActual();
