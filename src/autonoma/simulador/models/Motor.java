@@ -47,7 +47,7 @@ public class Motor {
         this.velocidadActual = velocidadActual;
     }
 
-    public boolean isEncendido() {
+    public boolean getEncendido() {
         return encendido;
     }
 
@@ -55,7 +55,7 @@ public class Motor {
         this.encendido = encendido;
     }
 
-    public boolean isApagado() {
+    public boolean getApagado() {
         return !encendido;
     }
 
@@ -99,6 +99,11 @@ public class Motor {
         return true;
     }
 
-    
+        public void apagarPorAccidente() {
+        this.encendido = false;
+        this.apagado = true;
+        this.velocidadActual = 0;
+    }       
+
 
 }

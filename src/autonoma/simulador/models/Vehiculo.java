@@ -12,7 +12,7 @@ import autonoma.simulador.exception.YaEstaEncendidoException;
 /**
  *
  * @author martin Taborda A
- * @since 20250404
+ * @since 20250404  
  * @version 1.0.0
  */
 public class Vehiculo {
@@ -58,11 +58,11 @@ public class Vehiculo {
         return motor;
     }
 
-    public void encender(){
-        this.motor.encender();
+    public boolean encender() {
+        return this.motor.encender(); // motor.encender() retorna true o false
     }
-    public void apagar(){
-        this.motor.apagar();
+    public boolean apagar(){
+        return this.motor.apagar();
     }
     
     /**
@@ -72,21 +72,22 @@ public class Vehiculo {
      * @param incremento La cantidad de velocidad a aumentar.
      * @return La nueva velocidad actual del vehiculo despues de acelerar.
      */
-    public double acelerar(double incremento) {
-         if (!motor.isEncendido()) {
-            throw new ApagadoNoPuedeAcelerarException();
-        }
-
-        double nuevaVelocidad = motor.getVelocidadActual() + incremento;
-        double limiteMotor = motor.getObtenerVelocidadMaxima();
-
-        if (nuevaVelocidad > limiteMotor) {
-            throw new SeAccidentaraException();
-        }
-
-        motor.setVelocidadActual(nuevaVelocidad);
-        return nuevaVelocidad;
+public double acelerar(double incremento) {
+    if (!motor.getEncendido()) {
+        throw new ApagadoNoPuedeAcelerarException();
     }
+
+    double nuevaVelocidad = motor.getVelocidadActual() + incremento;
+    double limiteMotor = motor.getObtenerVelocidadMaxima();
+
+    if (nuevaVelocidad > limiteMotor) {
+        throw new SeAccidentaraException();
+    }
+
+    motor.setVelocidadActual(nuevaVelocidad);
+    return nuevaVelocidad;
+}
+
 
     /**
      * Metodo que permite frenar el vehiculo.
@@ -95,37 +96,40 @@ public class Vehiculo {
      * @param decremento La cantidad de velocidad a reducir.
      * @return La nueva velocidad actual del vehiculo despues de frenar.
      */
-    public double frenar(double decremento) {
-        if (motor.isApagado()) {
-            throw new ApagadoNoPuedeFrenarException();
-        }
-
-        double velocidadActual = motor.getVelocidadActual();
-
-        if (velocidadActual == 0) {
-            throw new DetenidoException();
-        }
-
-        if (velocidadActual > llantas.getLimiteVelocidad()) {
-            patinando = true;
-            throw new ElVeiculoPatinaException();
-        }
-
-        velocidadActual -= decremento;
-        if (velocidadActual < 0) {
-            velocidadActual = 0;
-        }
-
-        motor.setVelocidadActual(velocidadActual);
-        return velocidadActual;
+public double frenar(double decremento) {
+    if (!motor.getEncendido()) {
+        throw new ApagadoNoPuedeFrenarException();
     }
+
+    double velocidadActual = motor.getVelocidadActual();
+
+    if (velocidadActual == 0) {
+        throw new DetenidoException();
+    }
+
+    if (velocidadActual > llantas.getLimiteVelocidad()) {
+        patinando = true;
+        throw new ElVeiculoPatinaException();
+    }
+
+    velocidadActual -= decremento;
+    if (velocidadActual < 0) {
+        velocidadActual = 0;
+    }
+
+    motor.setVelocidadActual(velocidadActual);
+    return velocidadActual;
+}
+
     public void recuperarElControl() {
         if (patinando) {
-            motor.setVelocidadActual(0.0);
+            motor.setVelocidadActual(0);
+            motor.setEncendido(false);
+            motor.setApagado(true);
             patinando = false;
         }
-
     }
+
     /**
      * Metodo que permite frenar bruscamente el vehiculo.
      * La velocidad disminuye al doble de la cantidad especificada y el vehiculo entra en estado de patinaje.

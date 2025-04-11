@@ -80,9 +80,7 @@ public class VentanaAccidentar extends JFrame{
 
     private void accidentarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accidentarMouseClicked
         ReproductorSonido.detener();
-        this.motor.setApagado(true);
-        this.motor.setEncendido(false);
-        this.motor.setVelocidadActual(0);
+        this.motor.apagarPorAccidente();
         this.dispose();
     }//GEN-LAST:event_accidentarMouseClicked
 

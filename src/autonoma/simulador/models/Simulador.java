@@ -22,22 +22,24 @@ public class Simulador {
         this.vehiculo = vehiculo;
     }
     public boolean encenderVehiculo(){
+        boolean encendido= false;
         try{
-            this.vehiculo.encender();
+            encendido = this.vehiculo.encender();
         }catch(YaEstaEncendidoException e){
             throw e;
         }
-        return true;
+        return encendido;
     }
     public boolean apagarVehiculo(){
+        boolean apagado = true;
         try{
-            this.vehiculo.apagar();
+            apagado= this.vehiculo.apagar();
         }catch(YaEstaApagadoException e){
             throw e;
         }catch(SeAccidentaraException e){
             throw e;
         }
-        return true;
+        return apagado;
     }
     public void acelerarVehiculo(double incremento){
         try{
@@ -63,4 +65,9 @@ public class Simulador {
     public void frenarBruscamenteVehiculo(double decremento){
         this.vehiculo.frenarBruscamente(decremento);
     }
+    
+    public boolean estaEncendidoElVehiculo() {
+        return this.vehiculo.getMotor().getEncendido();
+    }
+
 }

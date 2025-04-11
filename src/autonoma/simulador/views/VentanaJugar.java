@@ -234,7 +234,7 @@ public class VentanaJugar extends JFrame{
     }
     private void jlbAcelerarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbAcelerarMouseClicked
         try {
-            if (!simulador.encenderVehiculo()) {
+            if (!simulador.estaEncendidoElVehiculo()) {
                 throw new ApagadoNoPuedeAcelerarException();
             }
 
@@ -271,7 +271,7 @@ public class VentanaJugar extends JFrame{
 
     private void jlbFrenarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbFrenarMouseClicked
         try {
-            if (!simulador.encenderVehiculo()) {
+            if (!simulador.estaEncendidoElVehiculo()) {
                 throw new ApagadoNoPuedeFrenarException();
             }
 
@@ -293,6 +293,8 @@ public class VentanaJugar extends JFrame{
             } catch (ElVeiculoPatinaException e) {
                 VentanaPatinar ventana = new VentanaPatinar();
                 ventana.setVisible(true);
+                this.simulador.recuperarControlVehiuclo();
+                this.actualiarValorActual();
             }
 
             this.actualiarValorActual();
@@ -301,12 +303,12 @@ public class VentanaJugar extends JFrame{
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
-        } catch (ElVeiculoPatinaException e) {
-            this.actualiarValorActual(); 
+        } catch (ElVeiculoPatinaException e) { 
             VentanaPatinar ventana = new VentanaPatinar();
             ventana.setVisible(true);
             JOptionPane.showMessageDialog(this, e.getMessage());
             this.simulador.recuperarControlVehiuclo();
+            this.actualiarValorActual();
         }
     }//GEN-LAST:event_jlbFrenarMouseClicked
 
