@@ -63,7 +63,12 @@ public class Simulador {
         this.vehiculo.recuperarElControl();
     }
     public void frenarBruscamenteVehiculo(double decremento){
-        this.vehiculo.frenarBruscamente(decremento);
+        try{
+            this.vehiculo.frenarBruscamente(decremento);
+        }catch(ElVeiculoPatinaException e){
+            throw e;
+        }
+        
     }
     
     public boolean estaEncendidoElVehiculo() {
