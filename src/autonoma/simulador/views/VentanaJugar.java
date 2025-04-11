@@ -14,6 +14,7 @@ import autonoma.simulador.models.LectorArchivoTextoPlano;
 import autonoma.simulador.models.Llanta;
 import autonoma.simulador.models.Motor;
 import autonoma.simulador.models.Simulador;
+import autonoma.simulador.models.Taller;
 import autonoma.simulador.models.Vehiculo;
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +30,8 @@ import javax.swing.JFrame;
 public class VentanaJugar extends JFrame{
     private Simulador simulador;
     private Motor motor;
+    private Taller taller;
+    private Llanta llanta;
     /**
      * Creates new form VentanaJugar
      */
@@ -91,6 +94,7 @@ public class VentanaJugar extends JFrame{
         jLabel1 = new javax.swing.JLabel();
         velocidadActual = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -169,10 +173,20 @@ public class VentanaJugar extends JFrame{
         velocidadActual.setFont(new java.awt.Font("Segoe UI Symbol", 2, 14)); // NOI18N
         velocidadActual.setForeground(new java.awt.Color(204, 204, 204));
 
-        jButton1.setText("Salir");
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Reiniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/simulador/images/información30.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
             }
         });
 
@@ -191,15 +205,19 @@ public class VentanaJugar extends JFrame{
                     .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(velocidadActual, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(velocidadActual, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlbFrenar, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(jlbAcelerar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
         jPanel1Layout.setVerticalGroup(
@@ -223,6 +241,8 @@ public class VentanaJugar extends JFrame{
                             .addComponent(jlbFrenar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlbAcelerar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addContainerGap())))
         );
@@ -355,6 +375,15 @@ public class VentanaJugar extends JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        String mensaje = "Motor: " + this.motor.getNombre() + "\n" +
+                     "Velocidad Maxima Motor: " + this.motor.getObtenerVelocidadMaxima() + "\n" +
+                     "Velocidad Actual: " + this.motor.getVelocidadActual() + "\n" +
+                     "¿Está encendido?: " + this.motor.getEncendido();
+
+        JOptionPane.showMessageDialog(this, mensaje);
+    }//GEN-LAST:event_jLabel3MouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnApagar;
@@ -363,6 +392,7 @@ public class VentanaJugar extends JFrame{
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlbAcelerar;
     private javax.swing.JLabel jlbFrenar;
