@@ -144,6 +144,9 @@ public double frenar(double decremento) {
         if (decremento > 30) {
             throw new ElVeiculoPatinaException(); // Esto indicará que el vehículo patina
         }
+        if(decremento > this.llantas.getLimiteVelocidad()){
+            throw new ElVeiculoPatinaException();
+        }
     
     }
     

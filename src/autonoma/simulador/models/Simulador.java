@@ -6,6 +6,7 @@ package autonoma.simulador.models;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
 import autonoma.simulador.exception.ApagadoNoPuedeFrenarException;
+import autonoma.simulador.exception.DetenidoException;
 import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
@@ -53,6 +54,8 @@ public class Simulador {
     public void frenarVehiculo(double decremento){
         try{
             this.vehiculo.frenar(decremento);
+        }catch(DetenidoException e){
+            throw e;
         }catch (ApagadoNoPuedeFrenarException e){
             throw e;
         }catch(ElVeiculoPatinaException e){
@@ -63,7 +66,12 @@ public class Simulador {
         this.vehiculo.recuperarElControl();
     }
     public void frenarBruscamenteVehiculo(double decremento){
-        this.vehiculo.frenarBruscamente(decremento);
+        try{
+            this.vehiculo.frenarBruscamente(decremento);
+        }catch(ElVeiculoPatinaException e){
+            throw e;
+        }
+        
     }
     
     public boolean estaEncendidoElVehiculo() {

@@ -6,6 +6,7 @@ package autonoma.simulador.views;
 
 import autonoma.simulador.exception.ApagadoNoPuedeAcelerarException;
 import autonoma.simulador.exception.ApagadoNoPuedeFrenarException;
+import autonoma.simulador.exception.DetenidoException;
 import autonoma.simulador.exception.ElVeiculoPatinaException;
 import autonoma.simulador.exception.SeAccidentaraException;
 import autonoma.simulador.exception.YaEstaApagadoException;
@@ -333,6 +334,8 @@ public class VentanaJugar extends JFrame{
             this.actualiarValorActual();
 
         } catch (ApagadoNoPuedeFrenarException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }catch(DetenidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.");
