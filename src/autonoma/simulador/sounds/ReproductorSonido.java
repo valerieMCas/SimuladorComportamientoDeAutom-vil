@@ -5,17 +5,14 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-/**
- * Clase utilitaria para reproducir sonidos desde recursos.
- * 
- * Puede reproducir cualquier sonido ubicado en el paquete /autonoma/simulador/sounds/
- */
 public class ReproductorSonido {
 
     private static Clip clip;
 
     public static void reproducir(String nombreArchivo) {
         try {
+            detener(); // Detiene cualquier sonido anterior
+
             InputStream inputStream = ReproductorSonido.class.getResourceAsStream("/autonoma/simulador/sounds/" + nombreArchivo);
             if (inputStream == null) {
                 System.out.println("Archivo no encontrado: " + nombreArchivo);
@@ -25,7 +22,7 @@ public class ReproductorSonido {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY); // Lo repite hasta que lo detengas
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         } catch (Exception e) {
             System.out.println("Error al reproducir sonido: " + e.getMessage());
@@ -33,9 +30,15 @@ public class ReproductorSonido {
     }
 
     public static void detener() {
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-            clip.close();
+        try {
+            if (clip != null) {
+                clip.stop();
+                clip.flush();
+                clip.close();
+                clip = null;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al detener sonido: " + e.getMessage());
         }
     }
 }

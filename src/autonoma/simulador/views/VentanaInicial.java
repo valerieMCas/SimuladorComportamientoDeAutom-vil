@@ -5,7 +5,6 @@
 package autonoma.simulador.views;
 
 
-import autonoma.simulador.models.Simulador;
 import autonoma.simulador.sounds.ReproductorSonido;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

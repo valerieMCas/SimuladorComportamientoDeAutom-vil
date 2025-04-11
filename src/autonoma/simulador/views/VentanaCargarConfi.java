@@ -8,6 +8,7 @@ import autonoma.simulador.models.Escritor;
 import autonoma.simulador.models.EscritorArchivoTextoPlano;
 import autonoma.simulador.models.Simulador;
 import autonoma.simulador.models.Vehiculo;
+import autonoma.simulador.sounds.ReproductorSonido;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -37,8 +38,6 @@ public class VentanaCargarConfi extends JFrame{
         this.vehiculo = vehiculo;
     }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,6 +155,7 @@ public class VentanaCargarConfi extends JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiActionPerformed
+        ReproductorSonido.detener();
         Escritor escritorArchivo = new EscritorArchivoTextoPlano("config.txt");
         String tipoMotor = (String)this.jComboMotor.getSelectedItem();
         String tipoLlanta = (String)this.jComboBoxLlantas.getSelectedItem();
@@ -176,13 +176,11 @@ public class VentanaCargarConfi extends JFrame{
         }catch (IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
-
-
     }//GEN-LAST:event_btnConfiActionPerformed
 
     private void btnConfiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfiMouseClicked
-        
+        ReproductorSonido.detener();
+        this.dispose();
     }//GEN-LAST:event_btnConfiMouseClicked
 
     private void jComboBoxLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxLlantasActionPerformed
